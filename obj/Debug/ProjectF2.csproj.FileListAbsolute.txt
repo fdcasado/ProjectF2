@@ -86,3 +86,6 @@ C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\D
 C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.Migrations.Usuario.resources
 C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.csprojResolveAssemblyReference.cache
 C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.Migrations.UserIdOpcional.resources
+C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.Migrations.MarcaeModelo.resources
+C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.Migrations.MarcaeModelofk.resources
+C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.Migrations.MarcaeModelofk1.resources

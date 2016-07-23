@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectF2.Models
@@ -46,6 +47,8 @@ namespace ProjectF2.Models
         [Compare("Senha", ErrorMessage = "A Confirmaçõa da Senha deve ser igual ao que foi digitado no campo Senha.")]
         [Display(Name = "Confirmação da Senha")]
         public string ConfirmacaoSenha { get; set; }
+
+        public ICollection<Pedido> Pedidos { get; set; }
     }
 
 }

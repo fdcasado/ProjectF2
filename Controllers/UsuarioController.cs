@@ -152,6 +152,12 @@ namespace ProjectF2.Controllers
             return View(usuario);
         }
 
+        public ActionResult NovoPedido()
+        {
+            return View();
+        }
+
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

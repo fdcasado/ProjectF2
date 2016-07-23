@@ -223,6 +223,18 @@
     <Compile Include="Migrations\201607222308494_UserIdOpcional.Designer.cs">
       <DependentUpon>201607222308494_UserIdOpcional.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607232143329_Marca-e-Modelo.cs" />
+    <Compile Include="Migrations\201607232143329_Marca-e-Modelo.Designer.cs">
+      <DependentUpon>201607232143329_Marca-e-Modelo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607232201301_Marca-e-Modelo-fk.cs" />
+    <Compile Include="Migrations\201607232201301_Marca-e-Modelo-fk.Designer.cs">
+      <DependentUpon>201607232201301_Marca-e-Modelo-fk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607232208028_Marca-e-Modelo-fk-1.cs" />
+    <Compile Include="Migrations\201607232208028_Marca-e-Modelo-fk-1.Designer.cs">
+      <DependentUpon>201607232208028_Marca-e-Modelo-fk-1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -312,6 +324,7 @@
     <Content Include="Views\Usuario\RegistroSucesso.cshtml" />
     <Content Include="Views\Usuario\Editar.cshtml" />
     <Content Include="Views\Usuario\Registro.cshtml" />
+    <Content Include="Views\Usuario\NovoPedido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -339,6 +352,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607222308494_UserIdOpcional.resx">
       <DependentUpon>201607222308494_UserIdOpcional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607232143329_Marca-e-Modelo.resx">
+      <DependentUpon>201607232143329_Marca-e-Modelo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607232201301_Marca-e-Modelo-fk.resx">
+      <DependentUpon>201607232201301_Marca-e-Modelo-fk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607232208028_Marca-e-Modelo-fk-1.resx">
+      <DependentUpon>201607232208028_Marca-e-Modelo-fk-1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
