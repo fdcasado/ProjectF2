@@ -1,0 +1,17 @@
+﻿@model ProjectF2.Models.Lojista
+
+@{
+    ViewBag.Title = "Home";
+}
+@Html.AntiForgeryToken()
+<h2>Home</h2>
+
+<h3>Aqui vai ter todas as opções para o lojista</h3>
+
+<p>Consultar Histórico</p>
+
+<p>@Html.ActionLink("Editar informações", "/Editar")</p>
+
+<p>Configurar Assinaturas</p>
+
+<p>Lista das cotações pendentes</p>

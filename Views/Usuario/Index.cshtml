@@ -1,0 +1,18 @@
+﻿@model ProjectF2.Models.Usuario
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.AntiForgeryToken()
+<h2>Home</h2>
+
+<h3>Aqui vai ter todas as opções para o cliente</h3>
+
+<p>Consultar Histórico</p>
+
+<p>@Html.ActionLink("Editar informações", "Editar")</p>
+
+<p>Enviar pedidos de cotações</p>
+
+<p>Lista das cotações pendentes e vê as respostas.</p>
