@@ -3,16 +3,16 @@ namespace ProjectF2.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Lojista : DbMigration
+    public partial class fix2 : DbMigration
     {
         public override void Up()
         {
-            DropColumn("dbo.Lojistas", "ChaveConfirmacao");
+            AddColumn("dbo.RespostaPedidos", "IndStatusRespondido", c => c.Boolean(nullable: false));
         }
         
         public override void Down()
         {
-            AddColumn("dbo.Lojistas", "ChaveConfirmacao", c => c.String(maxLength: 20));
+            DropColumn("dbo.RespostaPedidos", "IndStatusRespondido");
         }
     }
 }

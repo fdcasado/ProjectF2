@@ -7,13 +7,13 @@ namespace ProjectF2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Lojista : IMigrationMetadata
+    public sealed partial class fix1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Lojista));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fix1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201607222009239_Lojista"; }
+            get { return "201607251418115_fix1"; }
         }
         
         string IMigrationMetadata.Source

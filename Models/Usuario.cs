@@ -6,10 +6,11 @@ namespace ProjectF2.Models
 {
     public class Usuario
     {
+
+        //public int UsuarioId { get; set; }
+
         [Required]
         [Key]
-        public int UsuarioId { get; set; }
-
         public string UserId { get; set; }
 
         [Required]

@@ -199,41 +199,30 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LojistaController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TransactionScope.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607202230334_InitialCreate.cs" />
-    <Compile Include="Migrations\201607202230334_InitialCreate.Designer.cs">
-      <DependentUpon>201607202230334_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201607251257502_creation.cs" />
+    <Compile Include="Migrations\201607251257502_creation.Designer.cs">
+      <DependentUpon>201607251257502_creation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607221750087_AddUserIdLojista.cs" />
-    <Compile Include="Migrations\201607221750087_AddUserIdLojista.Designer.cs">
-      <DependentUpon>201607221750087_AddUserIdLojista.cs</DependentUpon>
+    <Compile Include="Migrations\201607251311226_userid.cs" />
+    <Compile Include="Migrations\201607251311226_userid.Designer.cs">
+      <DependentUpon>201607251311226_userid.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607222009239_Lojista.cs" />
-    <Compile Include="Migrations\201607222009239_Lojista.Designer.cs">
-      <DependentUpon>201607222009239_Lojista.cs</DependentUpon>
+    <Compile Include="Migrations\201607251418115_fix1.cs" />
+    <Compile Include="Migrations\201607251418115_fix1.Designer.cs">
+      <DependentUpon>201607251418115_fix1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607222017520_Usuario.cs" />
-    <Compile Include="Migrations\201607222017520_Usuario.Designer.cs">
-      <DependentUpon>201607222017520_Usuario.cs</DependentUpon>
+    <Compile Include="Migrations\201607251438560_fix2.cs" />
+    <Compile Include="Migrations\201607251438560_fix2.Designer.cs">
+      <DependentUpon>201607251438560_fix2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607222308494_UserIdOpcional.cs" />
-    <Compile Include="Migrations\201607222308494_UserIdOpcional.Designer.cs">
-      <DependentUpon>201607222308494_UserIdOpcional.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607232143329_Marca-e-Modelo.cs" />
-    <Compile Include="Migrations\201607232143329_Marca-e-Modelo.Designer.cs">
-      <DependentUpon>201607232143329_Marca-e-Modelo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607232201301_Marca-e-Modelo-fk.cs" />
-    <Compile Include="Migrations\201607232201301_Marca-e-Modelo-fk.Designer.cs">
-      <DependentUpon>201607232201301_Marca-e-Modelo-fk.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607232208028_Marca-e-Modelo-fk-1.cs" />
-    <Compile Include="Migrations\201607232208028_Marca-e-Modelo-fk-1.Designer.cs">
-      <DependentUpon>201607232208028_Marca-e-Modelo-fk-1.cs</DependentUpon>
+    <Compile Include="Migrations\201607251722437_fix3.cs" />
+    <Compile Include="Migrations\201607251722437_fix3.Designer.cs">
+      <DependentUpon>201607251722437_fix3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -269,6 +258,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.maskedinput-1.3.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -325,6 +315,9 @@
     <Content Include="Views\Usuario\Editar.cshtml" />
     <Content Include="Views\Usuario\Registro.cshtml" />
     <Content Include="Views\Usuario\NovoPedido.cshtml" />
+    <Content Include="Views\Usuario\PedidoEnviadoSucesso.cshtml" />
+    <Content Include="Views\Usuario\EditarPedido.cshtml" />
+    <Content Include="Views\Usuario\VerRespostas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -338,29 +331,20 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607202230334_InitialCreate.resx">
-      <DependentUpon>201607202230334_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607251257502_creation.resx">
+      <DependentUpon>201607251257502_creation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607221750087_AddUserIdLojista.resx">
-      <DependentUpon>201607221750087_AddUserIdLojista.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607251311226_userid.resx">
+      <DependentUpon>201607251311226_userid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607222009239_Lojista.resx">
-      <DependentUpon>201607222009239_Lojista.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607251418115_fix1.resx">
+      <DependentUpon>201607251418115_fix1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607222017520_Usuario.resx">
-      <DependentUpon>201607222017520_Usuario.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607251438560_fix2.resx">
+      <DependentUpon>201607251438560_fix2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607222308494_UserIdOpcional.resx">
-      <DependentUpon>201607222308494_UserIdOpcional.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607232143329_Marca-e-Modelo.resx">
-      <DependentUpon>201607232143329_Marca-e-Modelo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607232201301_Marca-e-Modelo-fk.resx">
-      <DependentUpon>201607232201301_Marca-e-Modelo-fk.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607232208028_Marca-e-Modelo-fk-1.resx">
-      <DependentUpon>201607232208028_Marca-e-Modelo-fk-1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607251722437_fix3.resx">
+      <DependentUpon>201607251722437_fix3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

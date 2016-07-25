@@ -11,7 +11,21 @@ namespace ProjectF2.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirecionarUsuario();
+            //return View();
+        }
+
+        private ActionResult RedirecionarUsuario()
+        {
+
+            if (User.IsInRole("Usuario"))
+                return RedirectToAction("Index", "Usuario");
+            if (User.IsInRole("Lojista"))
+                return RedirectToAction("Index", "Lojista");
+            if (User.IsInRole("Administrador"))
+                return RedirectToAction("Index", "Administrador");
+            else
+                return View();
         }
 
         public ActionResult About()

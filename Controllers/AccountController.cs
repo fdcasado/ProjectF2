@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ProjectF2.Models;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ProjectF2.Controllers
 {
@@ -80,7 +81,9 @@ namespace ProjectF2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    //return RedirectToLocal(returnUrl);
+                    return RedirectToLocal("../Home");
+                //return RedirecionarUsuario();
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

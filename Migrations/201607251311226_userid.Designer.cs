@@ -7,13 +7,13 @@ namespace ProjectF2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UserIdOpcional : IMigrationMetadata
+    public sealed partial class userid : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UserIdOpcional));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(userid));
         
         string IMigrationMetadata.Id
         {
-            get { return "201607222308494_UserIdOpcional"; }
+            get { return "201607251311226_userid"; }
         }
         
         string IMigrationMetadata.Source
