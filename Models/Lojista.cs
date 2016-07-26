@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectF2.Models
@@ -53,6 +54,8 @@ namespace ProjectF2.Models
         [Display(Name = "Número do CNPJ")]
         //[RegularExpression(@"([0 - 9]{2}[.]?[0 - 9]{3}[.]?[0 - 9]{3}[/]?[0 - 9]{4}[-]?[0 - 9]{2})")]
         public string CNPJ { get; set; }
+
+        public ICollection<Assinatura> Assinaturas { get; set; }
 
     }
 

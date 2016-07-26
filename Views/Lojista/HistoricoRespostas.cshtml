@@ -1,19 +1,9 @@
 ﻿@model ProjectF2.Models.ListaPedidos
-
 @{
-    ViewBag.Title = "Home";
+    ViewBag.Title = "HistoricoRespostas";
 }
-@Html.AntiForgeryToken()
-<h2>Home</h2>
 
-<h3>Aqui vai ter todas as opções para o lojista</h3>
-
-<p>@Html.ActionLink("Consultar Histórico", "/HistoricoRespostas")</p>
-
-<p>@Html.ActionLink("Editar informações", "/Editar")</p>
-
-<p>Configurar Assinaturas</p>
-
+<h2>HistoricoRespostas</h2>
 
 @if (Model.ListagemPedidos.Count > 0)
 {
@@ -26,14 +16,10 @@
                     <td>@string.Format("{0:dd/MM/yyyy HH:mm}", pedido.Data)</td>
                     <td>@pedido.NomeModelo</td>
                     <td>@pedido.DescricaoPedido.Substring(0, (pedido.DescricaoPedido.Length > 200 ? 200 : pedido.DescricaoPedido.Length))</td>
-                    <td>@Html.ActionLink("Responder", "ResponderPedido", new { respostaId = pedido.RespostaId })</td>
+                    <td>@Html.ActionLink("Ver Resposta", "DetalheResposta", new { respostaId = pedido.RespostaId })</td>
                 </tr>
             }
         </tbody>
     </table>
 
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

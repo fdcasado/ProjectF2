@@ -1,0 +1,154 @@
+﻿@model ProjectF2.Models.ViewRespostaPedidos
+
+@{
+    ViewBag.Title = "ResponderPedido";
+}
+
+<h2>ResponderPedido</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>RespostaPedidos</h4>
+        <hr />
+        @Html.ValidationMessage("CustomError", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.RespostaPedidosId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeMarca, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.NomeMarca
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeModelo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.NomeModelo
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeTipoPeca, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.NomeTipoPeca
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AnoModelo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.AnoModelo
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DescricaoPedido, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.DescricaoPedido
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StatusResposta, "StatusResposta", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.StatusResposta,  htmlAttributes: new { @class = "form-control", @onchange = "funcStatusResposta()" })
+                @*Html.DropDownListFor(model => model.StatusResposta, ViewData["listaAcaoResposta"] as SelectList,
+    "-- selecione a ação --", new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.StatusResposta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="divMotivoNegarResposta" style="display:none">
+            @Html.LabelFor(model => model.MotivoNegarResposta, "MotivoNegarResposta", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.MotivoNegarResposta, htmlAttributes: new { @class = "form-control" })
+                @*Html.DropDownListFor(model => model.MotivoNegarResposta, ViewData["listMotivoNaoResposta"] as SelectList,
+    "-- selecione o motivo --", new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.MotivoNegarResposta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="divDescSolicitarMaisInfo" style="display:none">
+            @Html.LabelFor(model => model.DescSolicitarMaisInfo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.DescSolicitarMaisInfo, new { rows = 5, cols = 100, @class = "form-control textarea" })
+                @Html.ValidationMessageFor(model => model.DescSolicitarMaisInfo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="divResposta">
+            @Html.LabelFor(model => model.Resposta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Resposta, new { rows = 5, cols = 100, @class = "form-control textarea" })
+                @Html.ValidationMessageFor(model => model.Resposta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="divCondicoesPagamento">
+            @Html.LabelFor(model => model.CondicoesPagamento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.CondicoesPagamento, new { rows = 5, cols = 100, @class = "form-control textarea" })
+                @Html.ValidationMessageFor(model => model.CondicoesPagamento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="divCondicoesEntrega">
+            @Html.LabelFor(model => model.CondicoesEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.CondicoesEntrega, new { rows = 5, cols = 100, @class = "form-control textarea" })
+                @Html.ValidationMessageFor(model => model.CondicoesEntrega, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Enviar Pedido Cotação" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/jscript">
+    $(document).ready(function () {
+        funcStatusResposta();
+    });
+
+    function funcStatusResposta() {
+            var acao = $('#StatusResposta').val();
+            if (acao == 1 || acao == 2)
+            {
+                $('#divMotivoNegarResposta').hide();
+                $('#divDescSolicitarMaisInfo').hide();
+                $('#divResposta').show();
+                $('#divCondicoesPagamento').show();
+                $('#divCondicoesEntrega').show();
+            }
+            if (acao == 3)
+            {
+                $('#divMotivoNegarResposta').show();
+                $('#divDescSolicitarMaisInfo').hide();
+                $('#divResposta').hide();
+                $('#divCondicoesPagamento').hide();
+                $('#divCondicoesEntrega').hide();
+            }
+            if (acao == 4) {
+                $('#divMotivoNegarResposta').hide();
+                $('#divDescSolicitarMaisInfo').show();
+                $('#divResposta').hide();
+                $('#divCondicoesPagamento').hide();
+                $('#divCondicoesEntrega').hide();
+            }
+        }
+</script>
+}

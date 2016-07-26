@@ -9,6 +9,7 @@ namespace ProjectF2.Models
 {
     public class ProjectF2DBContext : DbContext
     {
+        public DbSet<Assinatura> Assinaturas { get; set; }
         public DbSet<Lojista> Lojistas { get; set; }
         public DbSet<Marca> Marcas { get; set; }
         public DbSet<Modelo> Modelos { get; set; }

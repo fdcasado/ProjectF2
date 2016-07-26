@@ -49,6 +49,7 @@ namespace ProjectF2.Models
         public int QtRespostasRecebidas { get; set; }
         public int QtRespostasPendentes { get; set; }
         public string MaisInfo { get; set; }
+        public int RespostaId { get; set; }
 
     }
 

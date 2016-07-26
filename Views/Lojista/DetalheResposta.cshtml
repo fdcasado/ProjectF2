@@ -1,0 +1,114 @@
+﻿@model ProjectF2.Models.ViewRespostaPedidos
+
+@{
+    ViewBag.Title = "DetalheResposta";
+}
+
+<h2>ResponderPedido</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>RespostaPedidos</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.RespostaPedidosId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeMarca, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.NomeMarca
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeModelo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.NomeModelo
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeTipoPeca, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.NomeTipoPeca
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AnoModelo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.AnoModelo
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DescricaoPedido, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.DescricaoPedido
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StatusResposta, "StatusResposta", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.StatusResposta, htmlAttributes: new { @class = "form-control" })
+                @*Html.DropDownListFor(model => model.StatusResposta, ViewData["listaAcaoResposta"] as SelectList,
+                    "-- selecione a ação --", new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.StatusResposta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MotivoNegarResposta, "MotivoNegarResposta", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.MotivoNegarResposta, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MotivoNegarResposta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DescSolicitarMaisInfo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.DescSolicitarMaisInfo, new { rows = 5, cols = 100, @class = "form-control textarea" })
+                @Html.ValidationMessageFor(model => model.DescSolicitarMaisInfo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Resposta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Resposta, new { rows = 5, cols = 100, @class = "form-control textarea" })
+                @Html.ValidationMessageFor(model => model.Resposta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CondicoesPagamento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.CondicoesPagamento, new { rows = 5, cols = 100, @class = "form-control textarea" })
+                @Html.ValidationMessageFor(model => model.CondicoesPagamento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CondicoesEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.CondicoesEntrega, new { rows = 5, cols = 100, @class = "form-control textarea" })
+                @Html.ValidationMessageFor(model => model.CondicoesEntrega, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

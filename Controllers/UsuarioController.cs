@@ -177,11 +177,11 @@ namespace ProjectF2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Registro(Usuario usuario)
         {
-            var user = new ApplicationUser { UserName = usuario.NomeCompleto, Email = usuario.Email };
+            var user = new ApplicationUser { UserName = usuario.Email, Email = usuario.Email };
             var result = await UserManager.CreateAsync(user, usuario.Senha);
             if (result.Succeeded)
             {
-                var currentUser = UserManager.FindByEmail(user.Email);
+                var currentUser = UserManager.FindByName(user.Email);
 
                 var roleresult = UserManager.AddToRole(currentUser.Id, "Usuario");
 
@@ -197,7 +197,7 @@ namespace ProjectF2.Controllers
             }
             AddErrors(result);
 
-            usuario.UserId = UserManager.FindByEmail(usuario.Email).Id;
+            usuario.UserId = UserManager.FindByName(usuario.Email).Id;
             db.Usuarios.Add(usuario);
             db.SaveChanges();
 
@@ -302,7 +302,9 @@ namespace ProjectF2.Controllers
                 {
                     PedidoId = pedido.PedidoId,
                     LojistaId = lojistaId,
-                    DataHoraResposta = DateTime.Now
+                    DataHoraResposta = DateTime.Now,
+                    StatusResposta = StatusResposta.Pendente,
+                    MotivoNegarResposta = MotivoNegarResposta.Motivo_0
                 });
                 db.SaveChanges();
             }
@@ -310,10 +312,21 @@ namespace ProjectF2.Controllers
 
         private List<int> SelecionarLojistas(Pedido pedido)
         {
-            List<int> r = new List<int>();
-            r.Add(1);
-            r.Add(2);
-            r.Add(3);
+            //List<int> r = new List<int>();
+            //r.Add(1);
+            //r.Add(2);
+            //r.Add(3);
+            //return r;
+
+            int marcaId = (from m in db.Modelos where m.ModeloId == pedido.ModeloId select m.MarcaId).SingleOrDefault();
+
+            List<int> r = (from p in db.Assinaturas
+                     where (p.Marca.Contains(marcaId + "#") || p.Marca == "*")
+                         && (p.Modelo.Contains(pedido.ModeloId + "#") || p.Modelo == "*")
+                         && (p.TipoPeca.Contains(pedido.TipoPecaId + "#") || p.TipoPeca == "*")
+                     select p.LojistaId).ToList();
+
+
             return r;
         }
 

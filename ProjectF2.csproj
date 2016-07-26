@@ -224,9 +224,35 @@
     <Compile Include="Migrations\201607251722437_fix3.Designer.cs">
       <DependentUpon>201607251722437_fix3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607261807386_fix11.cs" />
+    <Compile Include="Migrations\201607261807386_fix11.Designer.cs">
+      <DependentUpon>201607261807386_fix11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607261813211_fix12.cs" />
+    <Compile Include="Migrations\201607261813211_fix12.Designer.cs">
+      <DependentUpon>201607261813211_fix12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607261817371_fix13.cs" />
+    <Compile Include="Migrations\201607261817371_fix13.Designer.cs">
+      <DependentUpon>201607261817371_fix13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607262155402_fix14.cs" />
+    <Compile Include="Migrations\201607262155402_fix14.Designer.cs">
+      <DependentUpon>201607262155402_fix14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607262202399_fix15.cs" />
+    <Compile Include="Migrations\201607262202399_fix15.Designer.cs">
+      <DependentUpon>201607262202399_fix15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607262206235_fix21.cs" />
+    <Compile Include="Migrations\201607262206235_fix21.Designer.cs">
+      <DependentUpon>201607262206235_fix21.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Assinatura.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\keyAttribute.cs" />
     <Compile Include="Models\Lojista.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Marca.cs" />
@@ -318,6 +344,9 @@
     <Content Include="Views\Usuario\PedidoEnviadoSucesso.cshtml" />
     <Content Include="Views\Usuario\EditarPedido.cshtml" />
     <Content Include="Views\Usuario\VerRespostas.cshtml" />
+    <Content Include="Views\Lojista\HistoricoRespostas.cshtml" />
+    <Content Include="Views\Lojista\ResponderPedido.cshtml" />
+    <Content Include="Views\Lojista\DetalheResposta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -345,6 +374,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607251722437_fix3.resx">
       <DependentUpon>201607251722437_fix3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607261807386_fix11.resx">
+      <DependentUpon>201607261807386_fix11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607261813211_fix12.resx">
+      <DependentUpon>201607261813211_fix12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607261817371_fix13.resx">
+      <DependentUpon>201607261817371_fix13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607262155402_fix14.resx">
+      <DependentUpon>201607262155402_fix14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607262202399_fix15.resx">
+      <DependentUpon>201607262202399_fix15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607262206235_fix21.resx">
+      <DependentUpon>201607262206235_fix21.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
