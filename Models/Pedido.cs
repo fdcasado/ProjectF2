@@ -46,8 +46,7 @@ namespace ProjectF2.Models
         public string AnoModelo { get; set; }
         public string Status { get; set; }
         public string DescricaoPedido { get; set; }
-        public int QtRespostasRecebidas { get; set; }
-        public int QtRespostasPendentes { get; set; }
+        public bool IndNovaMensagem { get; set; }
         public string MaisInfo { get; set; }
         public int RespostaId { get; set; }
 

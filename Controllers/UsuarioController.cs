@@ -67,13 +67,18 @@ namespace ProjectF2.Controllers
                         Data = p.DataHora,
                         NomeModelo = mod.NomeModelo,
                         DescricaoPedido = p.DescricaoPedido,
-                        QtRespostasPendentes = 0,
-                        QtRespostasRecebidas = 0,
+                        IndNovaMensagem =
+                            (from c in db.Conversas
+                             join rp in db.RespostasPedidos on c.RespostaPedidosId equals rp.RespostaPedidosId
+                             where rp.PedidoId == p.PedidoId && c.IndMensagemLida == false && c.UserId != userId
+                             select c
+                             ).Any(),
                         Status = p.Status
                     };
 
-            IList<ViewPedido> pedidos = q.ToList();
 
+
+            IList <ViewPedido> pedidos = q.ToList();
 
             return View(new ListaPedidos
             {
@@ -121,20 +126,17 @@ namespace ProjectF2.Controllers
                         join mar in db.Marcas on mod.MarcaId equals mar.MarcaId
                         join tp in db.TiposPecas on p.TipoPecaId equals tp.TipoPecaId
                         where p.PedidoId == pedidoId && p.UserId == userId
-                                select new ViewPedido
+                        select new ViewPedido
                         {
                             PedidoId = p.PedidoId,
                             Data = p.DataHora,
                             NomeModelo = mod.NomeModelo,
                             DescricaoPedido = p.DescricaoPedido,
-                            QtRespostasPendentes = 0,
-                            QtRespostasRecebidas = 0,
                             Status = p.Status,
                             AnoModelo = p.AnoModelo,
                             NomeMarca = mar.NomeMarca,
                             NomeTipoPeca = tp.NomeTipoPeca
                         }).SingleOrDefault();
-
                 
                 return View(q);
 
@@ -224,6 +226,83 @@ namespace ProjectF2.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult VerConversa([Bind(Include = "RespostaPedidosId,NovaMensagem")] ViewRespostaPedidos resposta)
+        {
+            if (ModelState.IsValid)
+            {
+                Conversa c = new Conversa();
+                c.DataHoraResposta = DateTime.Now;
+                c.IndMensagemLida = false;
+                c.Mensagem = resposta.NovaMensagem;
+                c.RespostaPedidosId = resposta.RespostaPedidosId;
+                c.UserId = User.Identity.GetUserId();
+
+                db.Conversas.Add(c);
+                db.SaveChanges();
+
+                ModelState.Clear();
+            }
+
+            return VerConversa(resposta.RespostaPedidosId);
+        }
+
+        public ActionResult VerConversa(int respostaId)
+        {
+            if (ModelState.IsValid)
+            {
+
+                string userId = User.Identity.GetUserId();
+                ViewRespostaPedidos viewResposta = (from p in db.Pedidos
+                                                    join mod in db.Modelos on p.ModeloId equals mod.ModeloId
+                                                    join mar in db.Marcas on mod.MarcaId equals mar.MarcaId
+                                                    join tp in db.TiposPecas on p.TipoPecaId equals tp.TipoPecaId
+                                                    join rp in db.RespostasPedidos on p.PedidoId equals rp.PedidoId
+                                                    where rp.RespostaPedidosId == respostaId
+                                                        && p.UserId == userId
+                                                    select new ViewRespostaPedidos
+                                                    {
+                                                        RespostaPedidosId = rp.RespostaPedidosId,
+                                                        PedidoId = p.PedidoId,
+                                                        NomeModelo = mod.NomeModelo,
+                                                        DescricaoPedido = p.DescricaoPedido,
+                                                        AnoModelo = p.AnoModelo,
+                                                        NomeMarca = mar.NomeMarca,
+                                                        NomeTipoPeca = tp.NomeTipoPeca,
+                                                        Conversas = (from c in db.Conversas
+                                                                     where c.RespostaPedidosId == respostaId
+                                                                     orderby c.DataHoraResposta descending
+                                                                     select c).ToList()
+                                                    }).SingleOrDefault();
+
+                // Marcar as conversas não lidas como lidas.
+                foreach (Conversa item in viewResposta.Conversas)
+                {
+                    if (item.UserId != userId && item.IndMensagemLida == false)
+                    {
+                        item.IndMensagemLida = true;
+                        item.TempIndNovaMensagem = true;
+                        db.Entry(item).State = EntityState.Modified;
+                    }
+                }
+                db.SaveChanges();
+
+
+                if (viewResposta == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(viewResposta);
+            }
+
+
+            return View();
+        }
+
+
         // POST: Movies/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -302,21 +381,40 @@ namespace ProjectF2.Controllers
                 {
                     PedidoId = pedido.PedidoId,
                     LojistaId = lojistaId,
-                    DataHoraResposta = DateTime.Now,
-                    StatusResposta = StatusResposta.Pendente,
-                    MotivoNegarResposta = MotivoNegarResposta.Motivo_0
+                    IndNovoPedido = true                                        
                 });
                 db.SaveChanges();
             }
         }
 
+        public ActionResult VerEnvios(int pedidoId)
+        {
+            string userId = User.Identity.GetUserId();
+
+            IList<ViewGridRespostaCotacoes> ret = (from p in db.Pedidos
+                                                   join rp in db.RespostasPedidos on p.PedidoId equals rp.PedidoId
+                                                   join l in db.Lojistas on rp.LojistaId equals l.LojistaId
+                                                   where p.PedidoId == pedidoId
+                                                   && p.UserId == userId
+                                                   select new ViewGridRespostaCotacoes
+                                                   {
+                                                       PedidoId = p.PedidoId,
+                                                       LojistaId = rp.LojistaId,
+                                                       NomeLoja = l.NomeFantasia,
+                                                       RespostaId = rp.RespostaPedidosId,
+                                                       IndNovaMensagem = (from c in db.Conversas
+                                                                          where c.RespostaPedidosId == rp.RespostaPedidosId && c.IndMensagemLida == false && c.UserId != userId
+                                                                          select c).Any(),
+                    }).ToList();
+
+            return View(new ListaViewGridRespostaCotacoes
+            {
+                ListagemViewGridRespostaCotacoes = ret
+            });
+        }
+
         private List<int> SelecionarLojistas(Pedido pedido)
         {
-            //List<int> r = new List<int>();
-            //r.Add(1);
-            //r.Add(2);
-            //r.Add(3);
-            //return r;
 
             int marcaId = (from m in db.Modelos where m.ModeloId == pedido.ModeloId select m.MarcaId).SingleOrDefault();
 

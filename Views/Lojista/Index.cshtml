@@ -25,8 +25,9 @@
                 <tr>
                     <td>@string.Format("{0:dd/MM/yyyy HH:mm}", pedido.Data)</td>
                     <td>@pedido.NomeModelo</td>
+                    <td>@pedido.IndNovaMensagem</td>
                     <td>@pedido.DescricaoPedido.Substring(0, (pedido.DescricaoPedido.Length > 200 ? 200 : pedido.DescricaoPedido.Length))</td>
-                    <td>@Html.ActionLink("Responder", "ResponderPedido", new { respostaId = pedido.RespostaId })</td>
+                    <td>@Html.ActionLink("Responder", "VerConversa", new { respostaId = pedido.RespostaId })</td>
                 </tr>
             }
         </tbody>

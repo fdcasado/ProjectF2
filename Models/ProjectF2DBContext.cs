@@ -17,5 +17,6 @@ namespace ProjectF2.Models
         public DbSet<RespostaPedidos> RespostasPedidos { get; set; }
         public DbSet<TipoPeca> TiposPecas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Conversa> Conversas { get; set; }
     }
 }

@@ -1,0 +1,101 @@
+﻿@using Microsoft.AspNet.Identity
+@model ProjectF2.Models.ViewRespostaPedidos
+
+@{
+    ViewBag.Title = "VerConversa";
+}
+
+<h2>VerConversa</h2>
+
+<div class="form-horizontal">
+    <h4>RespostaPedidos</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NomeMarca, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Model.NomeMarca
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NomeModelo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Model.NomeModelo
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NomeTipoPeca, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Model.NomeTipoPeca
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AnoModelo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Model.AnoModelo
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DescricaoPedido, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Model.DescricaoPedido
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.RespostaPedidosId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.NovaMensagem, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NovaMensagem, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NovaMensagem, "", new { @class = "text-danger" })
+                <input type="submit" value="Enviar" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+    @if (Model.Conversas.Count > 0)
+    {
+        <table class="table">
+            <tbody>
+                @foreach (var item in Model.Conversas)
+                {
+                    <tr>
+                        <td>@string.Format("{0:dd/MM/yyyy HH:mm}", item.DataHoraResposta)</td>
+                        @if (item.UserId == User.Identity.GetUserId())
+                        {
+                            <td>Você</td>
+                        }
+                        else {
+                            <td>Ele</td>
+                        }
+
+                        <td>
+                            @if (item.TempIndNovaMensagem)
+                            {
+                                <b>@item.Mensagem</b>
+                            }
+                            else
+                            { 
+                                @item.Mensagem
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+
+<div>
+    <p>@Html.ActionLink("Voltar", "VerEnvios", new { pedidoId = Model.PedidoId })</p>
+    <p>@Html.ActionLink("Home", "Index")</p>
+</div>

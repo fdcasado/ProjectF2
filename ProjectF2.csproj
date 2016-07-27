@@ -248,9 +248,22 @@
     <Compile Include="Migrations\201607262206235_fix21.Designer.cs">
       <DependentUpon>201607262206235_fix21.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607271445388_fix.cs" />
+    <Compile Include="Migrations\201607271445388_fix.Designer.cs">
+      <DependentUpon>201607271445388_fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607271627403_fix16.cs" />
+    <Compile Include="Migrations\201607271627403_fix16.Designer.cs">
+      <DependentUpon>201607271627403_fix16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607271942289_novopedido.cs" />
+    <Compile Include="Migrations\201607271942289_novopedido.Designer.cs">
+      <DependentUpon>201607271942289_novopedido.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Assinatura.cs" />
+    <Compile Include="Models\Conversa.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\keyAttribute.cs" />
     <Compile Include="Models\Lojista.cs" />
@@ -345,8 +358,9 @@
     <Content Include="Views\Usuario\EditarPedido.cshtml" />
     <Content Include="Views\Usuario\VerRespostas.cshtml" />
     <Content Include="Views\Lojista\HistoricoRespostas.cshtml" />
-    <Content Include="Views\Lojista\ResponderPedido.cshtml" />
-    <Content Include="Views\Lojista\DetalheResposta.cshtml" />
+    <Content Include="Views\Usuario\VerEnvios.cshtml" />
+    <Content Include="Views\Usuario\VerConversa.cshtml" />
+    <Content Include="Views\Lojista\VerConversa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -392,6 +406,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607262206235_fix21.resx">
       <DependentUpon>201607262206235_fix21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607271445388_fix.resx">
+      <DependentUpon>201607271445388_fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607271627403_fix16.resx">
+      <DependentUpon>201607271627403_fix16.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607271942289_novopedido.resx">
+      <DependentUpon>201607271942289_novopedido.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

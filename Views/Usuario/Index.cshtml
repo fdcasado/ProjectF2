@@ -24,11 +24,9 @@
                     <td>@string.Format("{0:dd/MM/yyyy HH:mm}", pedido.Data)</td>
                     <td>@pedido.NomeModelo</td>
                     <td>@pedido.DescricaoPedido.Substring(0, (pedido.DescricaoPedido.Length>200 ? 200: pedido.DescricaoPedido.Length))</td>
-                    <td>@pedido.QtRespostasRecebidas.ToString()</td>
-                    <td>@pedido.QtRespostasPendentes.ToString()</td>
+                    <td>@pedido.IndNovaMensagem</td>
                     <td>@Html.ActionLink("Cancelar", "CancelarPedido", new { pedidoId = pedido.PedidoId })</td>
-                    @*<td>Html.ActionLink("Mais Info", "EditarPedido", new { pedidoId = pedido.PedidoId })</td>*@
-                    <td>@Html.ActionLink("Ver Respostas", "VerRespostas", new { pedidoId = pedido.PedidoId })</td>
+                    <td>@Html.ActionLink("Ver Envios", "VerEnvios", new { pedidoId = pedido.PedidoId })</td>
                 </tr>
             }
         </tbody>

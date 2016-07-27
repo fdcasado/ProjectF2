@@ -1,0 +1,34 @@
+﻿@model ProjectF2.Models.ListaViewGridRespostaCotacoes
+
+@{
+    ViewBag.Title = "VerEnvios";
+}
+
+<h2>VerEnvios</h2>
+
+
+@if (Model.ListagemViewGridRespostaCotacoes.Count > 0)
+{
+    <h4>Lista de Envios</h4>
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model.ListagemViewGridRespostaCotacoes)
+            {
+                <tr>
+                    <td>@item.NomeLoja</td>
+                    <td>@item.IndNovaMensagem.ToString()</td>
+                    <td>@Html.ActionLink("Ver", "VerConversa", new { respostaId = item.RespostaId })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

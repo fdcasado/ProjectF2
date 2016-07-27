@@ -91,3 +91,7 @@ C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\D
 C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.Migrations.fix14.resources
 C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.Migrations.fix15.resources
 C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.Migrations.fix21.resources
+C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.Migrations.fix.resources
+C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.Migrations.fix16.resources
+C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.csprojResolveAssemblyReference.cache
+C:\Users\fcasado\documents\visual studio 2015\Projects\ProjectF2\ProjectF2\obj\Debug\ProjectF2.Migrations.novopedido.resources

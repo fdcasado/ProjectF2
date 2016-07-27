@@ -6,35 +6,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectF2.Models
 {
-    public enum StatusResposta
-    {
-        [Display(Name = "Pendente")]
-        Pendente = 1,
+    //public enum MotivoNegarResposta
+    //{
+    //    [Display(Name = "Selecione o motivo")]
+    //    Motivo_0 = 0,
 
-        [Display(Name = "Responder")]
-        Responder,
+    //    [Display(Name = "Motivo 1")]
+    //    Motivo_1 = 1,
 
-        [Display(Name = "Não Responder")]
-        NaoReponder,
+    //    [Display(Name = "Motivo 2")]
+    //    Motivo_2,
 
-        [Display(Name = "Solicitar Mais Info")]
-        SolicitarMaisInfo
-    }
-
-    public enum MotivoNegarResposta
-    {
-        [Display(Name = "Selecione o motivo")]
-        Motivo_0 = 0,
-
-        [Display(Name = "Motivo 1")]
-        Motivo_1 = 1,
-
-        [Display(Name = "Motivo 2")]
-        Motivo_2,
-
-        [Display(Name = "Motivo 3")]
-        Motivo_3,      
-    }
+    //    [Display(Name = "Motivo 3")]
+    //    Motivo_3,      
+    //}
 
     public class RespostaPedidos
     {
@@ -45,24 +30,28 @@ namespace ProjectF2.Models
 
         public int LojistaId { get; set; }
 
-        public DateTime DataHoraResposta { get; set; }
+        public bool IndNovoPedido { get; set; }
 
-        public StatusResposta StatusResposta { get; set; }
-
-        public MotivoNegarResposta MotivoNegarResposta { get; set; }
-
-        public string DescSolicitarMaisInfo { get; set; }
-
-        public string Resposta { get; set; }
-
-        [Display(Name = "Condições para pagamento")]
-        public string CondicoesPagamento { get; set; }
-
-        [Display(Name = "Condições para entrega")]
-        public string CondicoesEntrega { get; set; }
+        public ICollection<Conversa> Conversas { get; set; }
     }
 
-    public class ViewRespostaPedidos : IValidatableObject
+    public class ViewGridRespostaCotacoes
+    {
+        public int PedidoId { get; set; }
+        public int RespostaId { get; set; }
+        public bool IndNovaMensagem { get; set; }
+        public int LojistaId { get; set; }
+        public string NomeLoja { get; set; }
+
+    }
+
+    public class ListaViewGridRespostaCotacoes
+    {
+        public IList<ViewGridRespostaCotacoes> ListagemViewGridRespostaCotacoes { get; set; }
+    }
+
+
+    public class ViewRespostaPedidos //: IValidatableObject
     {
         [Key]
         public int RespostaPedidosId { get; set; }
@@ -70,22 +59,6 @@ namespace ProjectF2.Models
         public int PedidoId { get; set; }
 
         public int LojistaId { get; set; }
-
-        public DateTime DataHoraResposta { get; set; }
-
-        public StatusResposta StatusResposta { get; set; }
-
-        public MotivoNegarResposta MotivoNegarResposta { get; set; }
-
-        public string DescSolicitarMaisInfo { get; set; }
-
-        public string Resposta { get; set; }
-
-        [Display(Name = "Condições para pagamento")]
-        public string CondicoesPagamento { get; set; }
-
-        [Display(Name = "Condições para entrega")]
-        public string CondicoesEntrega { get; set; }
 
         [Display(Name = "Marca")]
         [NotMapped]
@@ -107,17 +80,18 @@ namespace ProjectF2.Models
         [NotMapped]
         public string DescricaoPedido { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (StatusResposta == StatusResposta.SolicitarMaisInfo && string.IsNullOrEmpty(DescSolicitarMaisInfo))
-                yield return new ValidationResult("Indique quais informações adicionais você precisa", new []{ "DescSolicitarMaisInfo" });
+        [Required]
+        [NotMapped]
+        public string NovaMensagem { get; set; }
 
-            if (StatusResposta == StatusResposta.NaoReponder && MotivoNegarResposta==0)
-                yield return new ValidationResult("Indique o motivo", new[] { "MotivoNegarResposta" });
+        public IList<Conversa> Conversas { get; set; }
 
-            if (StatusResposta == StatusResposta.Responder && string.IsNullOrEmpty(Resposta))
-                yield return new ValidationResult("Preencha a resposta", new[] { "Resposta" });
-        }
+        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        //{
+        //    if (IndNegadoLojista && MotivoNegarResposta == 0)
+        //        yield return new ValidationResult("Indique o motivo", new[] { "MotivoNegarResposta" });
+
+        //}
     }
 
     public class ListaViewRespostaPedidos
