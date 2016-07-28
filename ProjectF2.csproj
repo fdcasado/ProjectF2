@@ -199,67 +199,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LojistaController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TransactionScope.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607251257502_creation.cs" />
-    <Compile Include="Migrations\201607251257502_creation.Designer.cs">
-      <DependentUpon>201607251257502_creation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607251311226_userid.cs" />
-    <Compile Include="Migrations\201607251311226_userid.Designer.cs">
-      <DependentUpon>201607251311226_userid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607251418115_fix1.cs" />
-    <Compile Include="Migrations\201607251418115_fix1.Designer.cs">
-      <DependentUpon>201607251418115_fix1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607251438560_fix2.cs" />
-    <Compile Include="Migrations\201607251438560_fix2.Designer.cs">
-      <DependentUpon>201607251438560_fix2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607251722437_fix3.cs" />
-    <Compile Include="Migrations\201607251722437_fix3.Designer.cs">
-      <DependentUpon>201607251722437_fix3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607261807386_fix11.cs" />
-    <Compile Include="Migrations\201607261807386_fix11.Designer.cs">
-      <DependentUpon>201607261807386_fix11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607261813211_fix12.cs" />
-    <Compile Include="Migrations\201607261813211_fix12.Designer.cs">
-      <DependentUpon>201607261813211_fix12.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607261817371_fix13.cs" />
-    <Compile Include="Migrations\201607261817371_fix13.Designer.cs">
-      <DependentUpon>201607261817371_fix13.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607262155402_fix14.cs" />
-    <Compile Include="Migrations\201607262155402_fix14.Designer.cs">
-      <DependentUpon>201607262155402_fix14.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607262202399_fix15.cs" />
-    <Compile Include="Migrations\201607262202399_fix15.Designer.cs">
-      <DependentUpon>201607262202399_fix15.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607262206235_fix21.cs" />
-    <Compile Include="Migrations\201607262206235_fix21.Designer.cs">
-      <DependentUpon>201607262206235_fix21.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607271445388_fix.cs" />
-    <Compile Include="Migrations\201607271445388_fix.Designer.cs">
-      <DependentUpon>201607271445388_fix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607271627403_fix16.cs" />
-    <Compile Include="Migrations\201607271627403_fix16.Designer.cs">
-      <DependentUpon>201607271627403_fix16.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607271942289_novopedido.cs" />
-    <Compile Include="Migrations\201607271942289_novopedido.Designer.cs">
-      <DependentUpon>201607271942289_novopedido.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -336,16 +279,10 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Lojista\Registro.cshtml" />
-    <Content Include="Views\Usuario\InformacoesPessoais.cshtml" />
     <Content Include="Views\Lojista\RegistroSucesso.cshtml" />
     <Content Include="Views\Lojista\Editar.cshtml" />
     <Content Include="Views\Lojista\Index.cshtml" />
@@ -355,9 +292,7 @@
     <Content Include="Views\Usuario\Registro.cshtml" />
     <Content Include="Views\Usuario\NovoPedido.cshtml" />
     <Content Include="Views\Usuario\PedidoEnviadoSucesso.cshtml" />
-    <Content Include="Views\Usuario\EditarPedido.cshtml" />
     <Content Include="Views\Usuario\VerRespostas.cshtml" />
-    <Content Include="Views\Lojista\HistoricoRespostas.cshtml" />
     <Content Include="Views\Usuario\VerEnvios.cshtml" />
     <Content Include="Views\Usuario\VerConversa.cshtml" />
     <Content Include="Views\Lojista\VerConversa.cshtml" />
@@ -374,50 +309,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607251257502_creation.resx">
-      <DependentUpon>201607251257502_creation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607251311226_userid.resx">
-      <DependentUpon>201607251311226_userid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607251418115_fix1.resx">
-      <DependentUpon>201607251418115_fix1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607251438560_fix2.resx">
-      <DependentUpon>201607251438560_fix2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607251722437_fix3.resx">
-      <DependentUpon>201607251722437_fix3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607261807386_fix11.resx">
-      <DependentUpon>201607261807386_fix11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607261813211_fix12.resx">
-      <DependentUpon>201607261813211_fix12.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607261817371_fix13.resx">
-      <DependentUpon>201607261817371_fix13.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607262155402_fix14.resx">
-      <DependentUpon>201607262155402_fix14.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607262202399_fix15.resx">
-      <DependentUpon>201607262202399_fix15.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607262206235_fix21.resx">
-      <DependentUpon>201607262206235_fix21.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607271445388_fix.resx">
-      <DependentUpon>201607271445388_fix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607271627403_fix16.resx">
-      <DependentUpon>201607271627403_fix16.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607271942289_novopedido.resx">
-      <DependentUpon>201607271942289_novopedido.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

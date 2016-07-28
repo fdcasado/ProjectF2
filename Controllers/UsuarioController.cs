@@ -119,51 +119,7 @@ namespace ProjectF2.Controllers
 
             return RedirectToAction("Index", "Usuario");
         }
-
-        public ActionResult EditarPedido(int pedidoId)
-        {
-            if (ModelState.IsValid)
-            {
-                string userId = User.Identity.GetUserId();
-
-                ViewPedido q = (from p in db.Pedidos
-                        join mod in db.Modelos on p.ModeloId equals mod.ModeloId
-                        join mar in db.Marcas on mod.MarcaId equals mar.MarcaId
-                        join tp in db.TiposPecas on p.TipoPecaId equals tp.TipoPecaId
-                        where p.PedidoId == pedidoId && p.UserId == userId
-                        select new ViewPedido
-                        {
-                            PedidoId = p.PedidoId,
-                            Data = p.DataHora,
-                            NomeModelo = mod.NomeModelo,
-                            DescricaoPedido = p.DescricaoPedido,
-                            Status = p.Status,
-                            AnoModelo = p.AnoModelo,
-                            NomeMarca = mar.NomeMarca,
-                            NomeTipoPeca = tp.NomeTipoPeca
-                        }).SingleOrDefault();
-                
-                return View(q);
-
-            }
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditarPedido([Bind(Include = "PedidoId,MaisInfo")] ViewPedido viewPedido)
-        {
-            if (ModelState.IsValid)
-            {
-                string userId = User.Identity.GetUserId();
-                Pedido pedido = (from p in db.Pedidos where p.PedidoId == viewPedido.PedidoId && p.UserId == userId select p).Single();
-                pedido.DescricaoPedido += "<br>" + viewPedido.MaisInfo;
-                db.Entry(pedido).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
+        
 
         public ActionResult VerRespostas(int pedidoId)
         {

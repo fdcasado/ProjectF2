@@ -53,37 +53,6 @@ namespace ProjectF2.Controllers
             }
         }
 
-        public ActionResult HistoricoRespostas()
-        {
-            //string userId = User.Identity.GetUserId();
-
-            //var q = from p in db.Pedidos
-            //        join mod in db.Modelos on p.ModeloId equals mod.ModeloId
-            //        join rp in db.RespostasPedidos on p.PedidoId equals rp.PedidoId
-            //        join lj in db.Lojistas on rp.LojistaId equals lj.LojistaId
-            //        where p.Status != "Cancelado"
-            //            && lj.UserId == userId
-            //            && (rp.StatusResposta == StatusResposta.Responder || rp.StatusResposta == StatusResposta.NaoReponder)
-            //        orderby p.DataHora descending
-            //        select new ViewPedido
-            //        {
-            //            PedidoId = p.PedidoId,
-            //            Data = p.DataHora,
-            //            NomeModelo = mod.NomeModelo,
-            //            DescricaoPedido = p.DescricaoPedido,
-            //            RespostaId = rp.RespostaPedidosId
-            //        };
-
-            //IList<ViewPedido> pedidos = q.ToList();
-
-            //return View(new ListaPedidos
-            //{
-            //    ListagemPedidos = pedidos
-            //});
-
-            return View();
-        }
-
 
         // GET: Lojista
         public ActionResult Index()
