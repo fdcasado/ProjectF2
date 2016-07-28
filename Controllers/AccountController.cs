@@ -77,13 +77,17 @@ namespace ProjectF2.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
+            string userid = UserManager.FindByEmail(model.Email).Id;
+            if (!UserManager.IsEmailConfirmed(userid))
+            {
+                return View("EmailNotConfirmed");
+            }
+
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    //return RedirectToLocal(returnUrl);
                     return RedirectToLocal("../Home");
-                //return RedirecionarUsuario();
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -93,6 +97,13 @@ namespace ProjectF2.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+        }
+
+        
+
+        public ActionResult EmailNotConfirmed()
+        {
+            return View();
         }
 
         //
@@ -275,12 +286,51 @@ namespace ProjectF2.Controllers
             return View();
         }
 
+
+        //
+        // GET: /Account/ChangePassword
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+
+                string controlerName="";
+                if (User.IsInRole("Usuario")) controlerName = "Usuario";
+                if (User.IsInRole("Lojista")) controlerName = "Lojista";
+
+                return RedirectToAction("Index", controlerName, new { Message = "ChangePasswordSuccess" });
+            }
+
+            AddErrors(result);
+            return View(model);
+        }
+
+
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            return code == null ? View("Error") : View();
+            return code == null ? View("Error") : View(new ResetPasswordViewModel { Code=code });
         }
 
         //

@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ProjectF2.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Lojista")]
     public class LojistaController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -86,7 +86,6 @@ namespace ProjectF2.Controllers
 
 
         // GET: Lojista
-        //[ValidateAntiForgeryToken]
         public ActionResult Index()
         {
             string userId = User.Identity.GetUserId();
@@ -119,109 +118,7 @@ namespace ProjectF2.Controllers
             });
 
         }
-
-        //public ActionResult DetalheResposta(int respostaId)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        string userId = User.Identity.GetUserId();
-
-        //        ViewRespostaPedidos viewResposta = (from p in db.Pedidos
-        //                                            join mod in db.Modelos on p.ModeloId equals mod.ModeloId
-        //                                            join mar in db.Marcas on mod.MarcaId equals mar.MarcaId
-        //                                            join tp in db.TiposPecas on p.TipoPecaId equals tp.TipoPecaId
-        //                                            join rp in db.RespostasPedidos on p.PedidoId equals rp.PedidoId
-        //                                            join lj in db.Lojistas on rp.LojistaId equals lj.LojistaId
-        //                                            where rp.RespostaPedidosId == respostaId
-        //                                                && lj.UserId == userId
-        //                                            //&& (rp.StatusResposta == StatusResposta.Pendente || rp.StatusResposta == StatusResposta.SolicitarMaisInfo)
-        //                                            select new ViewRespostaPedidos
-        //                                            {
-        //                                                RespostaPedidosId = rp.RespostaPedidosId,
-        //                                                PedidoId = p.PedidoId,
-        //                                                NomeModelo = mod.NomeModelo,
-        //                                                DescricaoPedido = p.DescricaoPedido,
-        //                                                AnoModelo = p.AnoModelo,
-        //                                                NomeMarca = mar.NomeMarca,
-        //                                                NomeTipoPeca = tp.NomeTipoPeca,
-        //                                                //StatusResposta = rp.StatusResposta,
-        //                                                //MotivoNegarResposta = rp.MotivoNegarResposta,
-        //                                                //DescSolicitarMaisInfo = rp.DescSolicitarMaisInfo,
-        //                                                //Resposta = rp.Resposta,
-        //                                                //CondicoesPagamento = rp.CondicoesPagamento,
-        //                                                //CondicoesEntrega = rp.CondicoesEntrega,
-        //                                            }).SingleOrDefault();
-
-        //        if (viewResposta == null)
-        //        {
-        //            return HttpNotFound();
-        //        }
-
-        //        return View(viewResposta);
-        //    }
-
-
-        //    return View();
-
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult ResponderPedido(ViewRespostaPedidos dados)
-        //{
-        //    string userId = User.Identity.GetUserId();
-
-        //    if (ModelState.IsValid)
-        //    {                
-        //        RespostaPedidos rp = (from p in db.RespostasPedidos
-        //                              join l in db.Lojistas on p.LojistaId equals l.LojistaId
-        //                         where p.RespostaPedidosId == dados.RespostaPedidosId && l.UserId == userId
-        //                         select p).SingleOrDefault();
-
-        //        //rp.RespostaPedidosId = dados.RespostaPedidosId;
-        //        //rp.CondicoesEntrega = dados.CondicoesEntrega;
-        //        //rp.CondicoesPagamento = dados.CondicoesPagamento;
-        //        //rp.DataHoraResposta = DateTime.Now;
-        //        //rp.DescSolicitarMaisInfo = dados.DescSolicitarMaisInfo;
-        //        //rp.MotivoNegarResposta = dados.MotivoNegarResposta;
-        //        //rp.Resposta = dados.Resposta;
-        //        //rp.StatusResposta = dados.StatusResposta;
-
-        //        db.Entry(rp).State = EntityState.Modified;
-        //        db.SaveChanges();
-
-        //        return RedirectToAction("/Index");
-        //    }
-
-        //    ViewRespostaPedidos viewResposta = (from p in db.Pedidos
-        //                                        join mod in db.Modelos on p.ModeloId equals mod.ModeloId
-        //                                        join mar in db.Marcas on mod.MarcaId equals mar.MarcaId
-        //                                        join tp in db.TiposPecas on p.TipoPecaId equals tp.TipoPecaId
-        //                                        join rp in db.RespostasPedidos on p.PedidoId equals rp.PedidoId
-        //                                        join lj in db.Lojistas on rp.LojistaId equals lj.LojistaId
-        //                                        where rp.RespostaPedidosId == dados.RespostaPedidosId
-        //                                            && lj.UserId == userId
-        //                                            //&& (rp.StatusResposta == StatusResposta.Pendente || rp.StatusResposta == StatusResposta.SolicitarMaisInfo)
-        //                                        select new ViewRespostaPedidos
-        //                                        {
-        //                                            RespostaPedidosId = rp.RespostaPedidosId,
-        //                                            PedidoId = p.PedidoId,
-        //                                            NomeModelo = mod.NomeModelo,
-        //                                            DescricaoPedido = p.DescricaoPedido,
-        //                                            AnoModelo = p.AnoModelo,
-        //                                            NomeMarca = mar.NomeMarca,
-        //                                            NomeTipoPeca = tp.NomeTipoPeca,
-        //                                            //StatusResposta = StatusResposta.Responder
-        //                                        }).SingleOrDefault();
-
-        //    if (viewResposta == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    return View(viewResposta);
-        //}
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult VerConversa([Bind(Include = "RespostaPedidosId,NovaMensagem")] ViewRespostaPedidos resposta)
@@ -235,15 +132,15 @@ namespace ProjectF2.Controllers
                 c.RespostaPedidosId = resposta.RespostaPedidosId;
                 c.UserId = User.Identity.GetUserId();
 
-                db.Conversas.Add(c);
-
                 RespostaPedidos ped = (from p in db.RespostasPedidos
                                        where p.RespostaPedidosId == resposta.RespostaPedidosId
                                        select p).Single();
 
-                ped.IndNovoPedido = false;
-                db.Entry(ped).State = EntityState.Modified;
 
+                ped.IndNovoPedido = false;
+
+                db.Conversas.Add(c);
+                db.Entry(ped).State = EntityState.Modified;
                 db.SaveChanges();
 
                 ModelState.Clear();
@@ -281,11 +178,12 @@ namespace ProjectF2.Controllers
                                                                     select c).ToList()
                                                     }).SingleOrDefault();
 
+
                 // Marcar as conversas não lidas como lidas.
                 foreach (Conversa item in viewResposta.Conversas)
                 {
-                    if (item.UserId != userId && item.IndMensagemLida==false)
-                    { 
+                    if (item.UserId != userId && item.IndMensagemLida == false)
+                    {
                         item.IndMensagemLida = true;
                         item.TempIndNovaMensagem = true;
                         db.Entry(item).State = EntityState.Modified;
@@ -395,7 +293,7 @@ namespace ProjectF2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "LojistaId,UserId,RazaoSocial,NomeFantasia,Email,Telefone,Senha,ConfirmacaoSenha,CNPJ")] Lojista lojista)
+        public ActionResult Editar([Bind(Include = "LojistaId,UserId,RazaoSocial,NomeFantasia,Email,Telefone,CNPJ")] Lojista lojista)
         {
             if (ModelState.IsValid)
             {

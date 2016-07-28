@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -86,6 +82,7 @@ namespace ProjectF2
             }
             return manager;
         }
+
     }
 
     // Configure the application sign-in manager which is used in this application.
@@ -106,4 +103,5 @@ namespace ProjectF2
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
+    
 }

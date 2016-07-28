@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -52,6 +54,7 @@ namespace ProjectF2.Controllers
             }
         }
 
+
         // GET: Usuario
         public ActionResult Index()
         {
@@ -86,9 +89,11 @@ namespace ProjectF2.Controllers
             });
         }
 
+        [AllowAnonymous]
         // GET: Usuario/RegistroSucesso
-        public ActionResult RegistroSucesso()
+        public ActionResult RegistroSucesso(string url)
         {
+            ViewBag.Url = url;
             return View();
         }
 
@@ -177,33 +182,32 @@ namespace ProjectF2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Registro(Usuario usuario)
+        public ActionResult Registro(Usuario usuario)
         {
             var user = new ApplicationUser { UserName = usuario.Email, Email = usuario.Email };
-            var result = await UserManager.CreateAsync(user, usuario.Senha);
+
+            var result = UserManager.Create(user, usuario.Senha);
             if (result.Succeeded)
             {
                 var currentUser = UserManager.FindByName(user.Email);
-
                 var roleresult = UserManager.AddToRole(currentUser.Id, "Usuario");
 
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                //SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // Send an email with this link                    
                 // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                //return RedirectToAction("Index", "Home");
+                
+                usuario.UserId = UserManager.FindByName(usuario.Email).Id;
+                db.Usuarios.Add(usuario);
+                db.SaveChanges();
             }
             AddErrors(result);
-
-            usuario.UserId = UserManager.FindByName(usuario.Email).Id;
-            db.Usuarios.Add(usuario);
-            db.SaveChanges();
-
-            return RedirectToAction("RegistroSucesso");
+           
+            string code = UserManager.GenerateEmailConfirmationToken(user.Id);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+            return RedirectToAction("RegistroSucesso", new { Url = callbackUrl } );
         }
 
         // GET: Movies/Edit/5
@@ -308,7 +312,7 @@ namespace ProjectF2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "UsuarioId,UserId,NomeCompleto,Email,Telefone,TelefoneVisivel,Senha,ConfirmacaoSenha")] Usuario usuario)
+        public ActionResult Editar([Bind(Include = "UsuarioId,UserId,NomeCompleto,Email,Telefone,TelefoneVisivel")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -353,16 +357,19 @@ namespace ProjectF2.Controllers
         [HttpPost]
         public ActionResult NovoPedido([Bind(Include = "ModeloId, AnoModelo, TipoPecaId, DescricaoPedido")] Pedido pedido)
         {
-            //TODO: implementar transação
+            using (System.Transactions.TransactionScope scope = new System.Transactions.TransactionScope())
+            {
 
-            pedido.UserId = User.Identity.GetUserId();
-            pedido.DataHora = DateTime.Now;
-            
-            db.Pedidos.Add(pedido);
-            db.SaveChanges();
+                pedido.UserId = User.Identity.GetUserId();
+                pedido.DataHora = DateTime.Now;
 
-            EnviarCotacaoLojistas(pedido);
+                db.Pedidos.Add(pedido);
+                db.SaveChanges();
 
+                EnviarCotacaoLojistas(pedido);
+
+                scope.Complete();
+            }
             return RedirectToAction("PedidoEnviadoSucesso");
         }
 

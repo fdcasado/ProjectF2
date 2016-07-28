@@ -109,4 +109,13 @@ namespace ProjectF2.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class UserNameViewModel
+    {
+        public UserNameViewModel(string userName)
+        {
+            UserName = userName;
+        }
+        public string UserName { get; set; }
+    }
 }
